@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": {
+        "token": "fe6c142d9b12db87d4a174c45e8b0e69/1a57c40a92cb6fe7bee630d88b783844d565fbac2ebfe5bb0626349e64c1e5298d03548cb6f95daaacac9fe497dc3924cfbed28a655aa9bbdeff55b06e0ee410",
+        "expiration": 3600
+    }
+}

@@ -17,6 +17,11 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      */
     protected $endpoint;
 
+    /**
+     * @var string|null
+     */
+    protected $authorizationToken;
+
     public function initialize(array $parameters = [])
     {
         parent::initialize($parameters);
@@ -48,9 +53,24 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getHeaders(): array
     {
-        return [
+        $headers = [
             'Content-Type' => 'application/json',
         ];
+        if (!empty($this->authorizationToken)) {
+            $headers['Authorization'] = 'Bearer ' . $this->authorizationToken;
+        }
+        return $headers;
+    }
+
+    public function getAuthorizationToken(): string
+    {
+        return $this->authorizationToken;
+    }
+
+    public function setAuthorizationToken(?string $authorizationToken): AbstractRequest
+    {
+        $this->authorizationToken = $authorizationToken;
+        return $this;
     }
 
     /**
@@ -66,6 +86,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             $body
         );
         return $this->createResponse($httpResponse->getBody()->getContents());
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->getParameter('reference');
+    }
+
+    public function setReference(string $value): AbstractRequest
+    {
+        return $this->setParameter('reference', $value);
     }
 
     protected function createResponse(string $data): Response

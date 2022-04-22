@@ -58,6 +58,19 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
+     * Get the errors from the response.
+     *
+     * Returns null if the request was successful.
+     */
+    public function getErrors(): ?array
+    {
+        if (!$this->isSuccessful() && isset($this->data['errors'])) {
+            return $this->data['errors'];
+        }
+        return null;
+    }
+
+    /**
      * Get the resource reference from the response.
      *
      * Returns null if the request was not successful.

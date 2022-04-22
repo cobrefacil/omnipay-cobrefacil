@@ -6,6 +6,7 @@ use Omnipay\CobreFacil\Message\AuthenticateRequest;
 use Omnipay\CobreFacil\Message\AuthenticateResponse;
 use Omnipay\CobreFacil\Message\CreateCardRequest;
 use Omnipay\CobreFacil\Message\CreateCustomerRequest;
+use Omnipay\CobreFacil\Message\CreateInvoiceRequest;
 use Omnipay\CobreFacil\Message\DeleteCardRequest;
 use Omnipay\CobreFacil\Message\DeleteCustomerRequest;
 use Omnipay\CobreFacil\Message\FetchCustomerRequest;
@@ -187,6 +188,17 @@ class Gateway extends AbstractGateway
     public function deleteCard(array $options = []): AbstractRequest
     {
         return $this->createRequest(DeleteCardRequest::class, $options);
+    }
+
+    /**
+     * Create invoice.
+     *
+     * @param array $options
+     * @return CreateInvoiceRequest
+     */
+    public function createInvoice(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(CreateInvoiceRequest::class, $options);
     }
 
     /**

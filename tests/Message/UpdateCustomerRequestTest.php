@@ -4,17 +4,18 @@ namespace Omnipay\CobreFacil\Message;
 
 use Omnipay\Tests\TestCase;
 
-class CreateCustomerRequestTest extends TestCase
+class UpdateCustomerRequestTest extends TestCase
 {
     public function setUp()
     {
-        $this->request = new CreateCustomerRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new UpdateCustomerRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request->setReference('Y73MNPGJ18Y18V5KQODX');
     }
 
     public function testEndpointProduction()
     {
         $this->assertSame(
-            'https://api.cobrefacil.com.br/v1/customers',
+            'https://api.cobrefacil.com.br/v1/customers/Y73MNPGJ18Y18V5KQODX',
             $this->request->getEndpoint()
         );
     }
@@ -23,14 +24,14 @@ class CreateCustomerRequestTest extends TestCase
     {
         $this->request->setProduction(false);
         $this->assertSame(
-            'https://api.sandbox.cobrefacil.com.br/v1/customers',
+            'https://api.sandbox.cobrefacil.com.br/v1/customers/Y73MNPGJ18Y18V5KQODX',
             $this->request->getEndpoint()
         );
     }
 
     public function testHttpMethod()
     {
-        $this->assertSame('POST', $this->request->getHttpMethod());
+        $this->assertSame('PUT', $this->request->getHttpMethod());
     }
 
     public function testDataPF()
@@ -131,7 +132,7 @@ class CreateCustomerRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('CreateCustomerSuccess.txt');
+        $this->setMockHttpResponse('UpdateCustomerSuccess.txt');
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
@@ -142,16 +143,13 @@ class CreateCustomerRequestTest extends TestCase
 
     public function testSendFailure()
     {
-        $this->setMockHttpResponse('CreateCustomerFailure.txt');
+        $this->setMockHttpResponse('UpdateCustomerFailure.txt');
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
         $this->assertNull($response->getReference());
         $this->assertNull($response->getData());
-        $this->assertSame('Parâmetros inválidos.', $response->getMessage());
-        $this->assertSame([
-            'O campo personal name é obrigatório.',
-            'O campo taxpayer id é obrigatório.',
-        ], $response->getErrors());
+        $this->assertSame('Cliente não encontrado.', $response->getMessage());
+        $this->assertEmpty($response->getErrors());
     }
 }

@@ -1,0 +1,75 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": [
+        {
+            "id": "Y73MNPGJ18Y18V5KQODX",
+            "person_type": 1,
+            "ein": null,
+            "company_name": null,
+            "taxpayer_id": "92970177625",
+            "personal_name": "Prof. Susie Crist DDS",
+            "telephone": "74962901780",
+            "cellular": "45934990058",
+            "email": "kiera.kris@sauer.org",
+            "email_cc": "dubuque.elisabeth@kovacek.org",
+            "address": {
+                "id": "L8D90PO2Z17Z4EGNM375",
+                "description": "AP",
+                "zipcode": "01311000",
+                "street": "Avenida Paulista",
+                "number": "123",
+                "complement": "Ap 42",
+                "neighborhood": "Bela Vista",
+                "city": "São Paulo",
+                "state": "SP",
+                "created_at": "2022-04-08T09:46:55-03:00",
+                "updated_at": "2022-04-08T09:46:55-03:00",
+                "deleted_at": null
+            },
+            "full_name": "Prof. Susie Crist DDS",
+            "document": "92970177625",
+            "created_at": "2022-04-08T09:46:55-03:00",
+            "updated_at": "2022-04-08T09:46:55-03:00",
+            "deleted_at": null,
+            "nfse": null
+        },
+        {
+            "id": "Y73MNPGJ18Y18V5KQODX",
+            "person_type": 1,
+            "ein": null,
+            "company_name": null,
+            "taxpayer_id": "92970177625",
+            "personal_name": "Prof. Susie Crist DDS",
+            "telephone": "74962901780",
+            "cellular": "45934990058",
+            "email": "kiera.kris@sauer.org",
+            "email_cc": "dubuque.elisabeth@kovacek.org",
+            "address": {
+                "id": "L8D90PO2Z17Z4EGNM375",
+                "description": "AP",
+                "zipcode": "01311000",
+                "street": "Avenida Paulista",
+                "number": "123",
+                "complement": "Ap 42",
+                "neighborhood": "Bela Vista",
+                "city": "São Paulo",
+                "state": "SP",
+                "created_at": "2022-04-08T09:46:55-03:00",
+                "updated_at": "2022-04-08T09:46:55-03:00",
+                "deleted_at": null
+            },
+            "full_name": "Prof. Susie Crist DDS",
+            "document": "92970177625",
+            "created_at": "2022-04-08T09:46:55-03:00",
+            "updated_at": "2022-04-08T09:46:55-03:00",
+            "deleted_at": null,
+            "nfse": null
+        }
+    ]
+}

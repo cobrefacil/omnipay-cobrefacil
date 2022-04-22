@@ -78,7 +78,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      */
     public function sendData($data)
     {
-        $body = json_encode($data);
+        $body = 'GET' === $this->getHttpMethod() ? null : json_encode($data);
         $httpResponse = $this->httpClient->request(
             $this->getHttpMethod(),
             $this->getEndpoint(),
@@ -86,6 +86,12 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             $body
         );
         return $this->createResponse($httpResponse->getBody()->getContents());
+    }
+
+    public function getQueryParams(): ?string
+    {
+        $data = $this->getData();
+        return empty($data) ? null : '?' . http_build_query($data);
     }
 
     public function getReference(): ?string

@@ -7,6 +7,7 @@ use Omnipay\CobreFacil\Message\AuthenticateResponse;
 use Omnipay\CobreFacil\Message\CreateCustomerRequest;
 use Omnipay\CobreFacil\Message\DeleteCustomerRequest;
 use Omnipay\CobreFacil\Message\FetchCustomerRequest;
+use Omnipay\CobreFacil\Message\ListCustomersRequest;
 use Omnipay\CobreFacil\Message\UpdateCustomerRequest;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
@@ -128,6 +129,17 @@ class Gateway extends AbstractGateway
     public function fetchCustomer(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(FetchCustomerRequest::class, $parameters);
+    }
+
+    /**
+     * List customers.
+     *
+     * @param array $parameters
+     * @return ListCustomersRequest
+     */
+    public function listCustomers(array $parameters = []): AbstractRequest
+    {
+        return $this->createRequest(ListCustomersRequest::class, $parameters);
     }
 
     /**

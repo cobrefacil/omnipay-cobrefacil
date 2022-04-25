@@ -12,7 +12,7 @@ use Omnipay\CobreFacil\InvoiceSettings;
  * @link https://developers.cobrefacil.com.br/#criar-cobranca-via-pix
  * @link https://developers.cobrefacil.com.br/#autorizar-cobranca-via-cartao
  */
-class CreateInvoiceRequest extends AbstractRequest
+class CreateInvoiceRequest extends AbstractInvoiceRequest
 {
     const PAYMENT_METHOD_BANKSLIP = 'bankslip';
     const PAYMENT_METHOD_CREDIT = 'credit';
@@ -35,6 +35,9 @@ class CreateInvoiceRequest extends AbstractRequest
             'customer_id' => $this->getCustomerId(),
             'due_date' => $this->getDueDate(),
         ];
+        if (!empty($this->getTransactionId())) {
+            $data['reference'] = $this->getTransactionId();
+        }
         $items = $this->getItems();
         if (!empty($items)) {
             foreach ($items as $item) {

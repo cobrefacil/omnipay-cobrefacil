@@ -7,7 +7,7 @@ namespace Omnipay\CobreFacil\Message;
  *
  * @link https://developers.cobrefacil.com.br/#capturar-cobranca-via-cartao
  */
-class CaptureRequest extends AbstractRequest
+class CaptureRequest extends AbstractInvoiceRequest
 {
     public function getHttpMethod(): string
     {
@@ -16,11 +16,12 @@ class CaptureRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices/' . $this->getReference() . '/capture';
+        return $this->endpoint . '/invoices/' . $this->getTransactionReference() . '/capture';
     }
 
     public function getData()
     {
+        $this->validate('transactionReference');
         return [
             'amount' => $this->getAmount(),
         ];

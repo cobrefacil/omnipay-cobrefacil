@@ -7,7 +7,7 @@ namespace Omnipay\CobreFacil\Message;
  *
  * @link https://developers.cobrefacil.com.br/#estornar-cobranca-via-cartao
  */
-class RefundRequest extends AbstractRequest
+class RefundRequest extends AbstractInvoiceRequest
 {
     public function getHttpMethod(): string
     {
@@ -16,11 +16,12 @@ class RefundRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices/' . $this->getReference() . '/refund';
+        return $this->endpoint . '/invoices/' . $this->getTransactionReference() . '/refund';
     }
 
     public function getData()
     {
+        $this->validate('transactionReference');
         return [
             'amount' => $this->getAmount(),
         ];

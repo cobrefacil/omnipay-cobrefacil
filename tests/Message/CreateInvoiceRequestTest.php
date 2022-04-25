@@ -58,12 +58,14 @@ class CreateInvoiceRequestTest extends TestCase
             ->setWarningDescription('Em caso de dúvidas entre em contato com nossa Central de Atendimento.')
             ->setSendTaxInvoice(true);
         $this->request
+            ->setTransactionId('100042')
             ->setPayableWith('bankslip')
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setDueDate('2022-12-05')
             ->setItems(new ItemBag([$item1, $item2]))
             ->setSettings($settings);
         $data = $this->request->getData();
+        $this->assertSame('100042', $data['reference']);
         $this->assertSame('bankslip', $data['payable_with']);
         $this->assertSame('Y73MNPGJ18Y18V5KQODX', $data['customer_id']);
         $this->assertSame('2022-12-05', $data['due_date']);
@@ -95,6 +97,7 @@ class CreateInvoiceRequestTest extends TestCase
             ->setQuantity(2)
             ->setPrice(39.99);
         $this->request
+            ->setTransactionId('100042')
             ->setPayableWith(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT)
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCardId('E65OPXNV9D59WM7JL402')
@@ -109,6 +112,7 @@ class CreateInvoiceRequestTest extends TestCase
                 'send_tax_invoice' => true,
             ]));
         $data = $this->request->getData();
+        $this->assertSame('100042', $data['reference']);
         $this->assertSame(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
         $this->assertSame('E65OPXNV9D59WM7JL402', $data['credit_card_id']);
         $this->assertSame(true, $data['capture']);
@@ -136,6 +140,7 @@ class CreateInvoiceRequestTest extends TestCase
             ->setQuantity(2)
             ->setPrice(39.99);
         $this->request
+            ->setTransactionId('100042')
             ->setPayableWith(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT)
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCard($card)
@@ -150,6 +155,7 @@ class CreateInvoiceRequestTest extends TestCase
                 'send_tax_invoice' => true,
             ]));
         $data = $this->request->getData();
+        $this->assertSame('100042', $data['reference']);
         $this->assertSame(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
         $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['credit_card']['name']);
         $this->assertSame($card['number'], $data['credit_card']['number']);
@@ -172,10 +178,13 @@ class CreateInvoiceRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse('CreateInvoiceSuccess.txt');
+        /** @var InvoiceResponse $response */
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertSame('2KD9LGERW897NZ6JM5V4', $response->getReference());
+        $this->assertSame('100042', $response->getTransactionId());
+        $this->assertSame('2KD9LGERW897NZ6JM5V4', $response->getTransactionReference());
+        $this->assertSame($response->getReference(), $response->getTransactionReference());
         $this->assertNotNull($response->getData());
         $this->assertNull($response->getMessage());
     }
@@ -183,10 +192,12 @@ class CreateInvoiceRequestTest extends TestCase
     public function testSendFailure()
     {
         $this->setMockHttpResponse('CreateInvoiceFailure.txt');
+        /** @var InvoiceResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertNull($response->getReference());
+        $this->assertNull($response->getTransactionId());
+        $this->assertNull($response->getTransactionReference());
         $this->assertNull($response->getData());
         $this->assertSame('Parâmetros inválidos.', $response->getMessage());
         $this->assertSame([

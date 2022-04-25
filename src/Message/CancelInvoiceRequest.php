@@ -7,7 +7,7 @@ namespace Omnipay\CobreFacil\Message;
  *
  * https://developers.cobrefacil.com.br/#cancelar-cobranca
  */
-class CancelInvoiceRequest extends AbstractRequest
+class CancelInvoiceRequest extends AbstractInvoiceRequest
 {
     public function getHttpMethod(): string
     {
@@ -16,11 +16,11 @@ class CancelInvoiceRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices/' . $this->getReference();
+        return $this->endpoint . '/invoices/' . $this->getTransactionReference();
     }
 
     public function getData()
     {
-        $this->validate('reference');
+        $this->validate('transactionReference');
     }
 }

@@ -16,7 +16,7 @@ class CancelInvoiceRequest extends AbstractInvoiceRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices/' . $this->getTransactionReference();
+        return $this->getBaseUri() . '/invoices/' . $this->getTransactionReference();
     }
 
     public function getData()

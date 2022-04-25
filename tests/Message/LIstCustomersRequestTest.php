@@ -21,7 +21,7 @@ class ListCustomersRequestTest extends TestCase
 
     public function testEndpointSandbox()
     {
-        $this->request->setProduction(false);
+        $this->request->setTestMode(true);
         $this->assertSame(
             'https://api.sandbox.cobrefacil.com.br/v1/customers',
             $this->request->getEndpoint()
@@ -31,7 +31,7 @@ class ListCustomersRequestTest extends TestCase
     public function testEndpointWithFilters()
     {
         $this->request
-            ->setProduction(true)
+            ->setTestMode(false)
             ->setTaxpayerId('123456789')
             ->setEin('987654321')
             ->setEmail('customer@mail.com')

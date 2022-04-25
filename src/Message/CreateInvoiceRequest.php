@@ -25,7 +25,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices';
+        return $this->getBaseUri() . '/invoices';
     }
 
     public function getData()

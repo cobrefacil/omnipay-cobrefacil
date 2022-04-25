@@ -18,7 +18,7 @@ class AuthenticateRequestTest extends TestCase
 
     public function testEndpointSandbox()
     {
-        $this->request->setProduction(false);
+        $this->request->setTestMode(true);
         $this->assertSame('https://api.sandbox.cobrefacil.com.br/v1/authenticate', $this->request->getEndpoint());
     }
 

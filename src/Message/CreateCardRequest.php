@@ -35,7 +35,7 @@ class CreateCardRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/cards';
+        return $this->getBaseUri() . '/cards';
     }
 
     public function getCustomerId()

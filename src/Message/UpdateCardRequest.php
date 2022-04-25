@@ -16,7 +16,7 @@ class UpdateCardRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/cards/' . $this->getReference() . '/default';
+        return $this->getBaseUri() . '/cards/' . $this->getReference() . '/default';
     }
 
     public function getData()

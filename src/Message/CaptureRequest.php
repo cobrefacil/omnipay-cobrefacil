@@ -16,7 +16,7 @@ class CaptureRequest extends AbstractInvoiceRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices/' . $this->getTransactionReference() . '/capture';
+        return $this->getBaseUri() . '/invoices/' . $this->getTransactionReference() . '/capture';
     }
 
     public function getData()

@@ -22,7 +22,7 @@ class RefundRequestTest extends TestCase
 
     public function testEndpointSandbox()
     {
-        $this->request->setProduction(false);
+        $this->request->setTestMode(true);
         $this->assertSame(
             'https://api.sandbox.cobrefacil.com.br/v1/invoices/OY4Q3NVG7VD759PRLD60/refund',
             $this->request->getEndpoint()

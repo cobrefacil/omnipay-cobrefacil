@@ -8,43 +8,13 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     const BASE_URI_PRODUCTION = 'https://api.cobrefacil.com.br/v1';
 
     /**
-     * @var bool
-     */
-    protected $production = true;
-
-    /**
-     * @var string
-     */
-    protected $endpoint;
-
-    /**
      * @var string|null
      */
     protected $authorizationToken;
 
-    public function initialize(array $parameters = [])
+    public function getBaseUri()
     {
-        parent::initialize($parameters);
-        $this->setEndpoint();
-        return $this;
-    }
-
-    public function getProduction(): bool
-    {
-        return $this->production;
-    }
-
-    public function setProduction(bool $production): AbstractRequest
-    {
-        $this->production = $production;
-        $this->setEndpoint();
-        return $this;
-    }
-
-    public function setEndpoint(string $endpoint = null): AbstractRequest
-    {
-        $this->endpoint = $endpoint ?? $this->production ? self::BASE_URI_PRODUCTION : self::BASE_URI_SANDBOX;
-        return $this;
+        return $this->getTestMode() ? self::BASE_URI_SANDBOX : self::BASE_URI_PRODUCTION;
     }
 
     abstract public function getEndpoint(): string;

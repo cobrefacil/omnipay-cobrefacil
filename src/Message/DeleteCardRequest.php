@@ -16,7 +16,7 @@ class DeleteCardRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/cards/' . $this->getReference();
+        return $this->getBaseUri() . '/cards/' . $this->getReference();
     }
 
     public function getData()

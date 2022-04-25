@@ -22,7 +22,7 @@ class UpdateCustomerRequestTest extends TestCase
 
     public function testEndpointSandbox()
     {
-        $this->request->setProduction(false);
+        $this->request->setTestMode(true);
         $this->assertSame(
             'https://api.sandbox.cobrefacil.com.br/v1/customers/Y73MNPGJ18Y18V5KQODX',
             $this->request->getEndpoint()

@@ -28,7 +28,7 @@ class AuthenticateRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/authenticate';
+        return $this->getBaseUri() . '/authenticate';
     }
 
     public function getAppId(): string

@@ -49,7 +49,7 @@ class ListCustomersRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/customers' . $this->getQueryParams();
+        return $this->getBaseUri() . '/customers' . $this->getQueryParams();
     }
 
     public function getTaxpayerId()

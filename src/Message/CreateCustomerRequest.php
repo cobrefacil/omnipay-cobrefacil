@@ -16,6 +16,6 @@ class CreateCustomerRequest extends AbstractCustomerWriteRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/customers';
+        return $this->getBaseUri() . '/customers';
     }
 }

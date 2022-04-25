@@ -16,7 +16,7 @@ class RefundRequest extends AbstractInvoiceRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/invoices/' . $this->getTransactionReference() . '/refund';
+        return $this->getBaseUri() . '/invoices/' . $this->getTransactionReference() . '/refund';
     }
 
     public function getData()

@@ -22,7 +22,7 @@ class UpdateCardRequestTest extends TestCase
 
     public function testEndpointSandbox()
     {
-        $this->request->setProduction(false);
+        $this->request->setTestMode(true);
         $this->assertSame(
             'https://api.sandbox.cobrefacil.com.br/v1/cards/E65OPXNV9D59WM7JL402/default',
             $this->request->getEndpoint()

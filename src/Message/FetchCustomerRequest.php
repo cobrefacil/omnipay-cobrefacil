@@ -21,6 +21,6 @@ class FetchCustomerRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint . '/customers/' . $this->getReference();
+        return $this->getBaseUri() . '/customers/' . $this->getReference();
     }
 }

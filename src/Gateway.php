@@ -4,6 +4,7 @@ namespace Omnipay\CobreFacil;
 
 use Omnipay\CobreFacil\Message\AuthenticateRequest;
 use Omnipay\CobreFacil\Message\AuthenticateResponse;
+use Omnipay\CobreFacil\Message\CancelInvoiceRequest;
 use Omnipay\CobreFacil\Message\CaptureRequest;
 use Omnipay\CobreFacil\Message\CreateCardRequest;
 use Omnipay\CobreFacil\Message\CreateCustomerRequest;
@@ -223,6 +224,17 @@ class Gateway extends AbstractGateway
     public function refund(array $options = []): AbstractRequest
     {
         return $this->createRequest(RefundRequest::class, $options);
+    }
+
+    /**
+     * Cancel invoice.
+     *
+     * @param array $options
+     * @return CancelInvoiceRequest
+     */
+    public function cancelInvoice(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(CancelInvoiceRequest::class, $options);
     }
 
     /**

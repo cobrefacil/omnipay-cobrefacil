@@ -2,6 +2,7 @@
 
 namespace Omnipay\CobreFacil\Message;
 
+use Omnipay\CobreFacil\InvoiceInstallment;
 use Omnipay\CobreFacil\InvoiceSettings;
 use Omnipay\Common\Item;
 use Omnipay\Common\ItemBag;
@@ -80,6 +81,91 @@ class CreateInvoiceRequestTest extends TestCase
         $this->assertSame(1.11, $data['settings']['discount']['amount']);
         $this->assertSame('2022-12-01', $data['settings']['discount']['limit_date']);
         $this->assertSame('Em caso de dúvidas entre em contato com nossa Central de Atendimento.', $data['settings']['warning']['description']);
+        $this->assertSame(true, $data['settings']['send_tax_invoice']);
+    }
+
+    public function testDataCreditPassingOnlyItsId()
+    {
+        $item1 = (new Item())
+            ->setDescription('Teclado')
+            ->setQuantity(1)
+            ->setPrice(49.99);
+        $item2 = (new Item())
+            ->setDescription('Mouse')
+            ->setQuantity(2)
+            ->setPrice(39.99);
+        $this->request
+            ->setPayableWith(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT)
+            ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
+            ->setCreditCardId('E65OPXNV9D59WM7JL402')
+            ->setCapture(true)
+            ->setRequestIp('127.0.0.1')
+            ->setInstallment(new InvoiceInstallment([
+                'number' => 3,
+                'mode' => InvoiceInstallment::MODE_INTEREST_FREE,
+            ]))
+            ->setItems(new ItemBag([$item1, $item2]))
+            ->setSettings(new InvoiceSettings([
+                'send_tax_invoice' => true,
+            ]));
+        $data = $this->request->getData();
+        $this->assertSame(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
+        $this->assertSame('E65OPXNV9D59WM7JL402', $data['credit_card_id']);
+        $this->assertSame(true, $data['capture']);
+        $this->assertSame('127.0.0.1', $data['request_ip']);
+        $this->assertSame(3, $data['installment']['number']);
+        $this->assertSame(InvoiceInstallment::MODE_INTEREST_FREE, $data['installment']['mode']);
+        $this->assertSame('Teclado', $data['items'][0]['description']);
+        $this->assertSame(1, $data['items'][0]['quantity']);
+        $this->assertSame(49.99, $data['items'][0]['price']);
+        $this->assertSame('Mouse', $data['items'][1]['description']);
+        $this->assertSame(2, $data['items'][1]['quantity']);
+        $this->assertSame(39.99, $data['items'][1]['price']);
+        $this->assertSame(true, $data['settings']['send_tax_invoice']);
+    }
+
+    public function testDataCreditPassingAllItsData()
+    {
+        $card = $this->getValidCard();
+        $item1 = (new Item())
+            ->setDescription('Teclado')
+            ->setQuantity(1)
+            ->setPrice(49.99);
+        $item2 = (new Item())
+            ->setDescription('Mouse')
+            ->setQuantity(2)
+            ->setPrice(39.99);
+        $this->request
+            ->setPayableWith(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT)
+            ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
+            ->setCreditCard($card)
+            ->setCapture(true)
+            ->setRequestIp('127.0.0.1')
+            ->setInstallment(new InvoiceInstallment([
+                'number' => 3,
+                'mode' => InvoiceInstallment::MODE_INTEREST_FREE,
+            ]))
+            ->setItems(new ItemBag([$item1, $item2]))
+            ->setSettings(new InvoiceSettings([
+                'send_tax_invoice' => true,
+            ]));
+        $data = $this->request->getData();
+        $this->assertSame(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
+        $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['credit_card']['name']);
+        $this->assertSame($card['number'], $data['credit_card']['number']);
+        $this->assertSame($card['expiryMonth'], $data['credit_card']['expiration_month']);
+        $this->assertSame($card['expiryYear'], $data['credit_card']['expiration_year']);
+        $this->assertSame($card['cvv'], $data['credit_card']['security_code']);
+        $this->assertSame(true, $data['capture']);
+        $this->assertSame('127.0.0.1', $data['request_ip']);
+        $this->assertSame(3, $data['installment']['number']);
+        $this->assertSame(InvoiceInstallment::MODE_INTEREST_FREE, $data['installment']['mode']);
+        $this->assertSame('Teclado', $data['items'][0]['description']);
+        $this->assertSame(1, $data['items'][0]['quantity']);
+        $this->assertSame(49.99, $data['items'][0]['price']);
+        $this->assertSame('Mouse', $data['items'][1]['description']);
+        $this->assertSame(2, $data['items'][1]['quantity']);
+        $this->assertSame(39.99, $data['items'][1]['price']);
         $this->assertSame(true, $data['settings']['send_tax_invoice']);
     }
 

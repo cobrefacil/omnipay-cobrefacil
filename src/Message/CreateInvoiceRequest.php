@@ -2,6 +2,7 @@
 
 namespace Omnipay\CobreFacil\Message;
 
+use Omnipay\CobreFacil\InvoiceInstallment;
 use Omnipay\CobreFacil\InvoiceSettings;
 
 /**
@@ -13,6 +14,10 @@ use Omnipay\CobreFacil\InvoiceSettings;
  */
 class CreateInvoiceRequest extends AbstractRequest
 {
+    const PAYMENT_METHOD_BANKSLIP = 'bankslip';
+    const PAYMENT_METHOD_CREDIT = 'credit';
+    const PAYMENT_METHOD_PIX = 'pix';
+
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -39,6 +44,32 @@ class CreateInvoiceRequest extends AbstractRequest
                     'price' => $item->getPrice(),
                 ];
             }
+        }
+        if (!empty($this->getCreditCardId())) {
+            $data['credit_card_id'] = $this->getCreditCardId();
+        }
+        if (!empty($this->getCreditCard())) {
+            $card = $this->getCreditCard();
+            $data['credit_card'] = [
+                'name' => $card['firstName'] . ' ' . $card['lastName'],
+                'number' => $card['number'],
+                'expiration_month' => $card['expiryMonth'],
+                'expiration_year' => $card['expiryYear'],
+                'security_code' => $card['cvv'],
+            ];
+        }
+        if (!empty($this->getCapture())) {
+            $data['capture'] = $this->getCapture();
+        }
+        if (!empty($this->getRequestIp())) {
+            $data['request_ip'] = $this->getRequestIp();
+        }
+        if (!empty($this->getInstallment())) {
+            $installment = $this->getInstallment();
+            $data['installment'] = [
+                'number' => $installment->getNumber(),
+                'mode' => $installment->getMode(),
+            ];
         }
         if (!empty($this->getSettings())) {
             $settings = $this->getSettings();
@@ -91,6 +122,56 @@ class CreateInvoiceRequest extends AbstractRequest
     public function setCustomerId($value): CreateInvoiceRequest
     {
         return $this->setParameter('customer_id', $value);
+    }
+
+    public function getCreditCard()
+    {
+        return $this->getParameter('credit_card');
+    }
+
+    public function setCreditCard($value): CreateInvoiceRequest
+    {
+        return $this->setParameter('credit_card', $value);
+    }
+
+    public function getCreditCardId()
+    {
+        return $this->getParameter('credit_card_id');
+    }
+
+    public function setCreditCardId($value): CreateInvoiceRequest
+    {
+        return $this->setParameter('credit_card_id', $value);
+    }
+
+    public function getCapture()
+    {
+        return $this->getParameter('capture');
+    }
+
+    public function setCapture($value): CreateInvoiceRequest
+    {
+        return $this->setParameter('capture', $value);
+    }
+
+    public function getRequestIp()
+    {
+        return $this->getParameter('request_ip');
+    }
+
+    public function setRequestIp($value): CreateInvoiceRequest
+    {
+        return $this->setParameter('request_ip', $value);
+    }
+
+    public function getInstallment(): ?InvoiceInstallment
+    {
+        return $this->getParameter('installment');
+    }
+
+    public function setInstallment($value): CreateInvoiceRequest
+    {
+        return $this->setParameter('installment', $value);
     }
 
     public function getDueDate()

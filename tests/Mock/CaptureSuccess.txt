@@ -1,0 +1,104 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": {
+        "id": "OY4Q3NVG7VD759PRLD60",
+        "reference": null,
+        "due_date": "2022-04-25",
+        "price": "88.00",
+        "fine_delay": 0,
+        "total_paid": null,
+        "amount_released": null,
+        "fee": null,
+        "paid_at": null,
+        "payable_with": "credit",
+        "payment_method": null,
+        "transaction_number": null,
+        "document_number": null,
+        "url_receipt": null,
+        "barcode": null,
+        "barcode_data": null,
+        "status": "paid",
+        "payment_link_id": null,
+        "request_ip": null,
+        "capture": 0,
+        "amount_refunded": "0.00",
+        "installment": {
+            "mode": "with_interest",
+            "number": 3
+        },
+        "credit_card": {
+            "id": "8WME2KLDZR1YZXV4G6JP",
+            "customer_id": "EWQDY3XN24K9PJGOK8MZ",
+            "default": 0,
+            "last4_digits": "5497",
+            "brand": "visa",
+            "expiration_year": "2022",
+            "expiration_month": "12",
+            "created_at": "2022-04-25T10:25:09-03:00",
+            "updated_at": "2022-04-25T10:25:09-03:00",
+            "deleted_at": null
+        },
+        "settings": {
+            "send_tax_invoice": 0
+        },
+        "customer": {
+            "id": "EWQDY3XN24K9PJGOK8MZ",
+            "person_type": 1,
+            "ein": null,
+            "company_name": null,
+            "taxpayer_id": "47586428778",
+            "personal_name": "Tre Hane PhD",
+            "telephone": "51934522161",
+            "cellular": "86964705055",
+            "email": "xschuster@prosacco.com",
+            "email_cc": "theresa.cruickshank@yahoo.com",
+            "address": {
+                "id": "LJK08ME2R3LXQP9WY46V",
+                "description": "AP",
+                "zipcode": "01311000",
+                "street": "Avenida Paulista",
+                "number": "123",
+                "complement": "Ap 42",
+                "neighborhood": "Bela Vista",
+                "city": "São Paulo",
+                "state": "SP",
+                "created_at": "2022-04-08T09:44:53-03:00",
+                "updated_at": "2022-04-08T09:44:53-03:00",
+                "deleted_at": null
+            },
+            "full_name": "Tre Hane PhD",
+            "document": "47586428778",
+            "created_at": "2022-04-08T09:44:53-03:00",
+            "updated_at": "2022-04-08T09:44:54-03:00",
+            "deleted_at": null,
+            "nfse": null
+        },
+        "url": "https://app.sandbox.cobrefacil.com.br/minha-fatura/OY4Q3NVG7VD759PRLD60",
+        "url_bankslip": null,
+        "url_tax_invoice": null,
+        "pix_br_code": null,
+        "pix_emv": null,
+        "items": [
+            {
+                "description": "Teclado",
+                "quantity": 1,
+                "price": "49.00"
+            },
+            {
+                "description": "Mouse",
+                "quantity": 1,
+                "price": "39.00"
+            }
+        ],
+        "tax_invoices_with_status_active": [],
+        "created_at": "2022-04-08T09:46:55-03:00",
+        "updated_at": "2022-04-08T09:46:55-03:00",
+        "deleted_at": null
+    }
+}

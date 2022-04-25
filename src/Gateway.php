@@ -4,6 +4,7 @@ namespace Omnipay\CobreFacil;
 
 use Omnipay\CobreFacil\Message\AuthenticateRequest;
 use Omnipay\CobreFacil\Message\AuthenticateResponse;
+use Omnipay\CobreFacil\Message\CaptureRequest;
 use Omnipay\CobreFacil\Message\CreateCardRequest;
 use Omnipay\CobreFacil\Message\CreateCustomerRequest;
 use Omnipay\CobreFacil\Message\CreateInvoiceRequest;
@@ -199,6 +200,17 @@ class Gateway extends AbstractGateway
     public function createInvoice(array $options = []): AbstractRequest
     {
         return $this->createRequest(CreateInvoiceRequest::class, $options);
+    }
+
+    /**
+     * Capture invoice pre authorized.
+     *
+     * @param array $options
+     * @return CaptureRequest
+     */
+    public function capture(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(CaptureRequest::class, $options);
     }
 
     /**

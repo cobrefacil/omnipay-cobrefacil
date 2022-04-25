@@ -184,7 +184,7 @@ class CreateInvoiceRequestTest extends TestCase
         $this->assertFalse($response->isRedirect());
         $this->assertSame('100042', $response->getTransactionId());
         $this->assertSame('2KD9LGERW897NZ6JM5V4', $response->getTransactionReference());
-        $this->assertSame($response->getReference(), $response->getTransactionReference());
+        $this->assertSame($response->getId(), $response->getTransactionReference());
         $this->assertNotNull($response->getData());
         $this->assertNull($response->getMessage());
     }

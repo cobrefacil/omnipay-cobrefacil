@@ -40,7 +40,7 @@ class DeleteCustomerRequestTest extends TestCase
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertSame('Y73MNPGJ18Y18V5KQODX', $response->getReference());
+        $this->assertSame('Y73MNPGJ18Y18V5KQODX', $response->getId());
         $this->assertNotNull($response->getData());
         $this->assertNull($response->getMessage());
     }
@@ -51,7 +51,7 @@ class DeleteCustomerRequestTest extends TestCase
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertNull($response->getReference());
+        $this->assertNull($response->getId());
         $this->assertNull($response->getData());
         $this->assertSame('Cliente não encontrado.', $response->getMessage());
         $this->assertEmpty($response->getErrors());

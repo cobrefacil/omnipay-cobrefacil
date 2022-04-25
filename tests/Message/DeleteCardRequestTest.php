@@ -40,7 +40,7 @@ class DeleteCardRequestTest extends TestCase
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertSame('E65OPXNV9D59WM7JL402', $response->getReference());
+        $this->assertSame('E65OPXNV9D59WM7JL402', $response->getId());
         $this->assertNotNull($response->getData());
         $this->assertNull($response->getMessage());
     }
@@ -51,7 +51,7 @@ class DeleteCardRequestTest extends TestCase
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertNull($response->getReference());
+        $this->assertNull($response->getId());
         $this->assertNull($response->getData());
         $this->assertSame('Nenhum resultado encontrado.', $response->getMessage());
     }

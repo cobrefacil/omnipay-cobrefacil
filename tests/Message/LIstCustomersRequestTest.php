@@ -84,7 +84,7 @@ class ListCustomersRequestTest extends TestCase
         $this->setMockHttpResponse('ListCustomersFailure.txt');
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
-        $this->assertNull($response->getReference());
+        $this->assertNull($response->getId());
         $this->assertSame('Cliente não encontrado.', $response->getMessage());
     }
 }

@@ -43,7 +43,7 @@ class CancelInvoiceRequestTest extends TestCase
         $this->assertFalse($response->isRedirect());
         $this->assertNull($response->getTransactionId());
         $this->assertSame('OY4Q3NVG7VD759PRLD60', $response->getTransactionReference());
-        $this->assertSame($response->getReference(), $response->getTransactionReference());
+        $this->assertSame($response->getId(), $response->getTransactionReference());
         $this->assertNotNull($response->getData());
         $this->assertNull($response->getMessage());
     }

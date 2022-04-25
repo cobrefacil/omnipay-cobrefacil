@@ -14,6 +14,6 @@ class InvoiceResponse extends Response
 
     public function getTransactionReference()
     {
-        return $this->getReference();
+        return $this->getId();
     }
 }

@@ -39,7 +39,7 @@ class FetchCustomerRequestTest extends TestCase
         $this->setMockHttpResponse('FetchCustomerSuccess.txt');
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('Y73MNPGJ18Y18V5KQODX', $response->getReference());
+        $this->assertSame('Y73MNPGJ18Y18V5KQODX', $response->getId());
         $this->assertNotNull($response->getData());
         $this->assertNull($response->getMessage());
     }
@@ -49,7 +49,7 @@ class FetchCustomerRequestTest extends TestCase
         $this->setMockHttpResponse('FetchCustomerFailure.txt');
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
-        $this->assertNull($response->getReference());
+        $this->assertNull($response->getId());
         $this->assertSame('Cliente não encontrado.', $response->getMessage());
     }
 }

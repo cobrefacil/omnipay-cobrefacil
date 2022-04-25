@@ -71,11 +71,11 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
-     * Get the resource reference from the response.
+     * Get the resource id from the response.
      *
      * Returns null if the request was not successful.
      */
-    public function getReference(): ?string
+    public function getId(): ?string
     {
         if (!$this->isSuccessful()) {
             return null;

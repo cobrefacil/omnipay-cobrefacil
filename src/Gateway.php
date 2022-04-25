@@ -12,6 +12,7 @@ use Omnipay\CobreFacil\Message\DeleteCardRequest;
 use Omnipay\CobreFacil\Message\DeleteCustomerRequest;
 use Omnipay\CobreFacil\Message\FetchCustomerRequest;
 use Omnipay\CobreFacil\Message\ListCustomersRequest;
+use Omnipay\CobreFacil\Message\RefundRequest;
 use Omnipay\CobreFacil\Message\UpdateCardRequest;
 use Omnipay\CobreFacil\Message\UpdateCustomerRequest;
 use Omnipay\Common\AbstractGateway;
@@ -211,6 +212,17 @@ class Gateway extends AbstractGateway
     public function capture(array $options = []): AbstractRequest
     {
         return $this->createRequest(CaptureRequest::class, $options);
+    }
+
+    /**
+     * Refund invoice.
+     *
+     * @param array $options
+     * @return RefundRequest
+     */
+    public function refund(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(RefundRequest::class, $options);
     }
 
     /**

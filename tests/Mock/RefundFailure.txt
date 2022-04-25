@@ -1,0 +1,10 @@
+HTTP/1.1 404 Not Found
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": false,
+    "message": "Cobrança não encontrada."
+}

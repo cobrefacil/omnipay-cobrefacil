@@ -2,6 +2,7 @@
 
 namespace Omnipay\CobreFacil;
 
+use Omnipay\CobreFacil\Exception\InvalidCredentialsException;
 use Omnipay\CobreFacil\Message\AuthenticateRequest;
 use Omnipay\CobreFacil\Message\AuthenticateResponse;
 use Omnipay\CobreFacil\Message\CaptureRequest;
@@ -28,30 +29,6 @@ use Omnipay\Common\Message\AbstractRequest;
 class Gateway extends AbstractGateway
 {
     /**
-     * @var bool
-     */
-    private $production = true;
-
-    /**
-     * @var string|null
-     */
-    private $authorizationToken;
-
-    /**
-     * @inheritdoc
-     */
-    public function initialize(array $parameters = [])
-    {
-        parent::initialize($parameters);
-        if (!empty($parameters)) {
-            /** @var AuthenticateResponse $authenticateResponse */
-            $authenticateResponse = $this->authenticate($parameters)->send();
-            $this->authorizationToken = $authenticateResponse->getToken();
-        }
-        return $this;
-    }
-
-    /**
      * @inheritdoc
      */
     public function getName()
@@ -60,39 +37,54 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getProduction(): bool
+    public function getAppId(): string
     {
-        return $this->production;
+        return $this->getParameter('app_id');
     }
 
     /**
-     * @param bool $production
+     * @param string $value
      * @return Gateway
      */
-    public function setProduction(bool $production): Gateway
+    public function setAppId(string $value): Gateway
     {
-        $this->production = $production;
-        return $this;
+        return $this->setParameter('app_id', $value);
     }
 
     /**
      * @return string
      */
-    public function getAuthorizationToken(): string
+    public function getSecret(): string
     {
-        return $this->authorizationToken;
+        return $this->getParameter('secret');
     }
 
     /**
-     * @param string $authorizationToken
+     * @param string $value
      * @return Gateway
      */
-    public function setAuthorizationToken(string $authorizationToken): Gateway
+    public function setSecret(string $value): Gateway
     {
-        $this->authorizationToken = $authorizationToken;
-        return $this;
+        return $this->setParameter('secret', $value);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAuthorizationToken(): ?string
+    {
+        return $this->getParameter('authorizationToken');
+    }
+
+    /**
+     * @param string $value
+     * @return Gateway
+     */
+    public function setAuthorizationToken(string $value): Gateway
+    {
+        return $this->setParameter('authorizationToken', $value);
     }
 
     /**
@@ -100,6 +92,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      * @return AuthenticateRequest
+     * @throws InvalidCredentialsException
      */
     public function authenticate(array $parameters = []): AbstractRequest
     {
@@ -111,6 +104,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      * @return CreateCustomerRequest
+     * @throws InvalidCredentialsException
      */
     public function createCustomer(array $parameters = []): AbstractRequest
     {
@@ -122,6 +116,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      * @return UpdateCustomerRequest
+     * @throws InvalidCredentialsException
      */
     public function updateCustomer(array $parameters = []): AbstractRequest
     {
@@ -133,6 +128,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      * @return FetchCustomerRequest
+     * @throws InvalidCredentialsException
      */
     public function fetchCustomer(array $parameters = []): AbstractRequest
     {
@@ -144,6 +140,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      * @return ListCustomersRequest
+     * @throws InvalidCredentialsException
      */
     public function listCustomers(array $parameters = []): AbstractRequest
     {
@@ -155,6 +152,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      * @return DeleteCustomerRequest
+     * @throws InvalidCredentialsException
      */
     public function deleteCustomer(array $parameters = []): AbstractRequest
     {
@@ -166,6 +164,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return CreateCardRequest
+     * @throws InvalidCredentialsException
      */
     public function createCard(array $options = []): AbstractRequest
     {
@@ -177,6 +176,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return UpdateCardRequest
+     * @throws InvalidCredentialsException
      */
     public function updateCard(array $options = []): AbstractRequest
     {
@@ -188,6 +188,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return DeleteCardRequest
+     * @throws InvalidCredentialsException
      */
     public function deleteCard(array $options = []): AbstractRequest
     {
@@ -199,6 +200,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return PurchaseRequest
+     * @throws InvalidCredentialsException
      */
     public function authorize(array $options = []): AbstractRequest
     {
@@ -210,6 +212,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return CaptureRequest
+     * @throws InvalidCredentialsException
      */
     public function capture(array $options = []): AbstractRequest
     {
@@ -221,6 +224,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return PurchaseRequest
+     * @throws InvalidCredentialsException
      */
     public function purchase(array $options = []): AbstractRequest
     {
@@ -232,6 +236,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return RefundRequest
+     * @throws InvalidCredentialsException
      */
     public function refund(array $options = []): AbstractRequest
     {
@@ -243,6 +248,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return VoidRequest
+     * @throws InvalidCredentialsException
      */
     public function void(array $options = []): AbstractRequest
     {
@@ -254,6 +260,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $options
      * @return FetchTransactionRequest
+     * @throws InvalidCredentialsException
      */
     public function fetchTransaction(array $options = []): AbstractRequest
     {
@@ -261,14 +268,31 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @inheritDoc
+     * @param string $class
+     * @param array $parameters
+     * @return AbstractRequest
+     * @throws InvalidCredentialsException
      */
     protected function createRequest($class, array $parameters)
     {
-        $parameters = array_merge($parameters, [
-            'production' => $this->production,
-            'authorizationToken' => $this->authorizationToken,
-        ]);
+        if (AuthenticateRequest::class !== $class && empty($this->getAuthorizationToken())) {
+            $this->authenticateWithParameters($parameters);
+        }
         return parent::createRequest($class, $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return void
+     * @throws InvalidCredentialsException
+     */
+    private function authenticateWithParameters(array $parameters): void
+    {
+        /** @var AuthenticateResponse $authenticateResponse */
+        $authenticateResponse = $this->authenticate($parameters)->send();
+        if (!$authenticateResponse->isSuccessful()) {
+            throw new InvalidCredentialsException($authenticateResponse->getMessage());
+        }
+        $this->setAuthorizationToken($authenticateResponse->getToken());
     }
 }

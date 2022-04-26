@@ -194,12 +194,12 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * Create invoice.
+     * Authorize an amount on the customers card.
      *
      * @param array $options
      * @return PurchaseRequest
      */
-    public function purchase(array $options = []): AbstractRequest
+    public function authorize(array $options = []): AbstractRequest
     {
         return $this->createRequest(PurchaseRequest::class, $options);
     }
@@ -213,6 +213,17 @@ class Gateway extends AbstractGateway
     public function capture(array $options = []): AbstractRequest
     {
         return $this->createRequest(CaptureRequest::class, $options);
+    }
+
+    /**
+     * Create invoice.
+     *
+     * @param array $options
+     * @return PurchaseRequest
+     */
+    public function purchase(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(PurchaseRequest::class, $options);
     }
 
     /**

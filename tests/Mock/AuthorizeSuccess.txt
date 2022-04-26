@@ -1,0 +1,92 @@
+HTTP/1.1 201 Created
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": {
+        "id": "2KD9LGERW897NZ6JM5V4",
+        "reference": "100042",
+        "payable_with": "bankslip",
+        "due_date": "2020-12-15",
+        "price": "89.98",
+        "fine_delay": null,
+        "total_paid": null,
+        "amount_released": null,
+        "fee": null,
+        "paid_at": null,
+        "payment_method": null,
+        "document_number": null,
+        "url_receipt": null,
+        "barcode": "34191090570137951893731339210002284700000008998",
+        "barcode_data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZUAAAAyCAYAAACUNUbZAAACHUlEQVR42u3V2wqAIAwA0P3/Txc9%0ABD6kuGkQcYIIb63W7EREHNfRXu+z126PUf9b657Gs/OycXrPPZo3u/5L93nqH9VDJS+7xnfX2Y78%0AVOq0uu9m5vfijdrV/Zep02q8mbytfJdM/Oy+XHmfal1V/4cr+Q+oQAUqUIEKVKACFahABSpQgQpU%0AoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKAC%0AFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWo%0AQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAF%0AKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQ%0AgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEK%0AVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSg%0AAhWoQAUqUIEKVKACFahABSpQgQpUoAIVqEAFKlCBClSgAhWoQAUqUIEKVKACFahABSpQgQpUoAIV%0AqEAFKv9G5QSDfSad5j+EigAAAABJRU5ErkJggg==%0A",
+        "status": "pre_authorized",
+        "settings": {
+            "late_fee": {
+                "mode": "percentage",
+                "amount": "10"
+            },
+            "interest": {
+                "mode": "daily_percentage",
+                "amount": "0.1"
+            },
+            "discount": {
+                "mode": "fixed",
+                "limit_date": 5,
+                "amount": "9.99"
+            },
+            "warning": "- Em caso de dúvidas entre em contato com nossa Central de Atendimento.",
+            "max_installments": null,
+            "send_tax_invoice": 1
+        },
+        "items": [
+            {
+                "description": "Teclado",
+                "quantity": 1,
+                "price": "49.99"
+            },
+            {
+                "description": "Mouse",
+                "quantity": 1,
+                "price": "39.99"
+            }
+        ],
+        "customer": {
+            "id": "Y73MNPGJ18Y18V5KQODX",
+            "person_type": 1,
+            "ein": null,
+            "company_name": null,
+            "taxpayer_id": "12345678909",
+            "personal_name": "João da Silva Machado",
+            "telephone": "11988887777",
+            "cellular": "11988887777",
+            "email": "joaosilva@cobrefacil.com.br",
+            "email_cc": "maria@cobrefacil.com.br",
+            "address": {
+                "id": "E1V3649DR48XJQ87OMNL",
+                "description": "AP 42",
+                "zipcode": "01311000",
+                "street": "Avenida Paulista",
+                "number": "807",
+                "complement": "A813 CJ 2315",
+                "neighborhood": "Bela Vista",
+                "city": "São Paulo",
+                "state": "SP",
+                "created_at": "2020-06-25T09:52:48-03:00",
+                "updated_at": "2020-06-25T09:55:50-03:00",
+                "deleted_at": null
+            },
+            "full_name": "João da Silva Machado",
+            "document": "12345678909",
+            "created_at": "2020-06-25T09:52:48-03:00",
+            "updated_at": "2020-06-25T09:55:50-03:00",
+            "deleted_at": null
+        },
+        "url": "https://app.cobrefacil.com.br/minha-fatura/2KD9LGERW897NZ6JM5V4",
+        "created_at": "2022-04-08T09:46:55-03:00",
+        "updated_at": "2022-04-08T09:46:55-03:00",
+        "deleted_at": null
+    }
+}

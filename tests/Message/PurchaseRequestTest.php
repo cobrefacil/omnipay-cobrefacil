@@ -8,11 +8,11 @@ use Omnipay\Common\Item;
 use Omnipay\Common\ItemBag;
 use Omnipay\Tests\TestCase;
 
-class CreateInvoiceRequestTest extends TestCase
+class PurchaseRequestTest extends TestCase
 {
     public function setUp()
     {
-        $this->request = new CreateInvoiceRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
     }
 
     public function testEndpointProduction()
@@ -98,7 +98,7 @@ class CreateInvoiceRequestTest extends TestCase
             ->setPrice(39.99);
         $this->request
             ->setTransactionId('100042')
-            ->setPayableWith(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT)
+            ->setPayableWith(PurchaseRequest::PAYMENT_METHOD_CREDIT)
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCardId('E65OPXNV9D59WM7JL402')
             ->setCapture(true)
@@ -113,7 +113,7 @@ class CreateInvoiceRequestTest extends TestCase
             ]));
         $data = $this->request->getData();
         $this->assertSame('100042', $data['reference']);
-        $this->assertSame(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
+        $this->assertSame(PurchaseRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
         $this->assertSame('E65OPXNV9D59WM7JL402', $data['credit_card_id']);
         $this->assertSame(true, $data['capture']);
         $this->assertSame('127.0.0.1', $data['request_ip']);
@@ -141,7 +141,7 @@ class CreateInvoiceRequestTest extends TestCase
             ->setPrice(39.99);
         $this->request
             ->setTransactionId('100042')
-            ->setPayableWith(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT)
+            ->setPayableWith(PurchaseRequest::PAYMENT_METHOD_CREDIT)
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCard($card)
             ->setCapture(true)
@@ -156,7 +156,7 @@ class CreateInvoiceRequestTest extends TestCase
             ]));
         $data = $this->request->getData();
         $this->assertSame('100042', $data['reference']);
-        $this->assertSame(CreateInvoiceRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
+        $this->assertSame(PurchaseRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
         $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['credit_card']['name']);
         $this->assertSame($card['number'], $data['credit_card']['number']);
         $this->assertSame($card['expiryMonth'], $data['credit_card']['expiration_month']);
@@ -177,7 +177,7 @@ class CreateInvoiceRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('CreateInvoiceSuccess.txt');
+        $this->setMockHttpResponse('PurchaseSuccess.txt');
         /** @var InvoiceResponse $response */
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
@@ -191,7 +191,7 @@ class CreateInvoiceRequestTest extends TestCase
 
     public function testSendFailure()
     {
-        $this->setMockHttpResponse('CreateInvoiceFailure.txt');
+        $this->setMockHttpResponse('PurchaseFailure.txt');
         /** @var InvoiceResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());

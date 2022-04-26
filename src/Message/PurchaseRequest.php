@@ -12,7 +12,7 @@ use Omnipay\CobreFacil\InvoiceSettings;
  * @link https://developers.cobrefacil.com.br/#criar-cobranca-via-pix
  * @link https://developers.cobrefacil.com.br/#autorizar-cobranca-via-cartao
  */
-class CreateInvoiceRequest extends AbstractInvoiceRequest
+class PurchaseRequest extends AbstractInvoiceRequest
 {
     const PAYMENT_METHOD_BANKSLIP = 'bankslip';
     const PAYMENT_METHOD_CREDIT = 'credit';
@@ -112,7 +112,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('payable_with');
     }
 
-    public function setPayableWith($value): CreateInvoiceRequest
+    public function setPayableWith($value): PurchaseRequest
     {
         return $this->setParameter('payable_with', $value);
     }
@@ -122,7 +122,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('customer_id');
     }
 
-    public function setCustomerId($value): CreateInvoiceRequest
+    public function setCustomerId($value): PurchaseRequest
     {
         return $this->setParameter('customer_id', $value);
     }
@@ -132,7 +132,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('credit_card');
     }
 
-    public function setCreditCard($value): CreateInvoiceRequest
+    public function setCreditCard($value): PurchaseRequest
     {
         return $this->setParameter('credit_card', $value);
     }
@@ -142,7 +142,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('credit_card_id');
     }
 
-    public function setCreditCardId($value): CreateInvoiceRequest
+    public function setCreditCardId($value): PurchaseRequest
     {
         return $this->setParameter('credit_card_id', $value);
     }
@@ -152,7 +152,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('capture');
     }
 
-    public function setCapture($value): CreateInvoiceRequest
+    public function setCapture($value): PurchaseRequest
     {
         return $this->setParameter('capture', $value);
     }
@@ -162,7 +162,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('request_ip');
     }
 
-    public function setRequestIp($value): CreateInvoiceRequest
+    public function setRequestIp($value): PurchaseRequest
     {
         return $this->setParameter('request_ip', $value);
     }
@@ -172,7 +172,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('installment');
     }
 
-    public function setInstallment($value): CreateInvoiceRequest
+    public function setInstallment($value): PurchaseRequest
     {
         return $this->setParameter('installment', $value);
     }
@@ -182,7 +182,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('due_date');
     }
 
-    public function setDueDate($value): CreateInvoiceRequest
+    public function setDueDate($value): PurchaseRequest
     {
         return $this->setParameter('due_date', $value);
     }
@@ -192,7 +192,7 @@ class CreateInvoiceRequest extends AbstractInvoiceRequest
         return $this->getParameter('settings');
     }
 
-    public function setSettings($value): CreateInvoiceRequest
+    public function setSettings($value): PurchaseRequest
     {
         return $this->setParameter('settings', $value);
     }

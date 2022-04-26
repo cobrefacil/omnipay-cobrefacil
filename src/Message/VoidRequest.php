@@ -7,7 +7,7 @@ namespace Omnipay\CobreFacil\Message;
  *
  * https://developers.cobrefacil.com.br/#cancelar-cobranca
  */
-class CancelInvoiceRequest extends AbstractInvoiceRequest
+class VoidRequest extends AbstractInvoiceRequest
 {
     public function getHttpMethod(): string
     {

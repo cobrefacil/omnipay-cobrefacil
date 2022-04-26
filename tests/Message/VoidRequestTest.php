@@ -4,11 +4,11 @@ namespace Omnipay\CobreFacil\Message;
 
 use Omnipay\Tests\TestCase;
 
-class CancelInvoiceRequestTest extends TestCase
+class VoidRequestTest extends TestCase
 {
     public function setUp()
     {
-        $this->request = new CancelInvoiceRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new VoidRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->setTransactionReference('OY4Q3NVG7VD759PRLD60');
     }
 
@@ -36,7 +36,7 @@ class CancelInvoiceRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('CancelInvoiceSuccess.txt');
+        $this->setMockHttpResponse('VoidSuccess.txt');
         /** @var InvoiceResponse $response */
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
@@ -50,7 +50,7 @@ class CancelInvoiceRequestTest extends TestCase
 
     public function testSendFailure()
     {
-        $this->setMockHttpResponse('CancelInvoiceFailure.txt');
+        $this->setMockHttpResponse('VoidFailure.txt');
         /** @var InvoiceResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());

@@ -50,7 +50,7 @@ class RefundRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse('RefundSuccess.txt');
-        /** @var InvoiceResponse $response */
+        /** @var TransactionResponse $response */
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
@@ -64,7 +64,7 @@ class RefundRequestTest extends TestCase
     public function testSendFailure()
     {
         $this->setMockHttpResponse('RefundFailure.txt');
-        /** @var InvoiceResponse $response */
+        /** @var TransactionResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());

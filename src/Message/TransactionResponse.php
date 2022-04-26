@@ -2,7 +2,7 @@
 
 namespace Omnipay\CobreFacil\Message;
 
-class InvoiceResponse extends Response
+class TransactionResponse extends Response
 {
     public function getTransactionId()
     {

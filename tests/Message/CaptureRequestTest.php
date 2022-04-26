@@ -50,7 +50,7 @@ class CaptureRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse('CaptureSuccess.txt');
-        /** @var InvoiceResponse $response */
+        /** @var TransactionResponse $response */
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
@@ -64,7 +64,7 @@ class CaptureRequestTest extends TestCase
     public function testSendFailure()
     {
         $this->setMockHttpResponse('CaptureFailure.txt');
-        /** @var InvoiceResponse $response */
+        /** @var TransactionResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());

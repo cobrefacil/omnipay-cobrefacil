@@ -178,7 +178,7 @@ class PurchaseRequestTest extends TestCase
     public function testSendSuccess()
     {
         $this->setMockHttpResponse('PurchaseSuccess.txt');
-        /** @var InvoiceResponse $response */
+        /** @var TransactionResponse $response */
         $response = $this->request->send();
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
@@ -192,7 +192,7 @@ class PurchaseRequestTest extends TestCase
     public function testSendFailure()
     {
         $this->setMockHttpResponse('PurchaseFailure.txt');
-        /** @var InvoiceResponse $response */
+        /** @var TransactionResponse $response */
         $response = $this->request->send();
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());

@@ -16,4 +16,12 @@ class InvoiceResponse extends Response
     {
         return $this->getId();
     }
+
+    public function getStatus()
+    {
+        if (!$this->isSuccessful()) {
+            return null;
+        }
+        return $this->getData()['status'];
+    }
 }

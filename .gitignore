@@ -1,4 +1,4 @@
 .idea
 node_modules
-report
 vendor
+composer.lock

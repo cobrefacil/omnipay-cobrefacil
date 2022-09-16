@@ -13,13 +13,15 @@ abstract class AbstractCustomerWriteRequest extends AbstractRequest
     public function getData()
     {
         $data['person_type'] = $this->getPersonType();
-        if (self::PERSON_TYPE_PF === $this->getPersonType()) {
-            $data['taxpayer_id'] = $this->getTaxpayerId();
-            $data['personal_name'] = $this->getPersonalName();
-        }
-        if (self::PERSON_TYPE_PJ === $this->getPersonType()) {
-            $data['ein'] = $this->getEin();
-            $data['company_name'] = $this->getCompanyName();
+        switch ((int)$this->getPersonType()) {
+            case self::PERSON_TYPE_PF:
+                $data['taxpayer_id'] = $this->getTaxpayerId();
+                $data['personal_name'] = $this->getPersonalName();
+                break;
+            case self::PERSON_TYPE_PJ:
+                $data['ein'] = $this->getEin();
+                $data['company_name'] = $this->getCompanyName();
+                break;
         }
         if ($this->getTelephone()) {
             $data['telephone'] = $this->getTelephone();

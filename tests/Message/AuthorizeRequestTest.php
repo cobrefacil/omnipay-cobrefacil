@@ -48,7 +48,7 @@ class AuthorizeRequestTest extends TestCase
             ->setQuantity(2)
             ->setPrice(39.99);
         $this->request
-            ->setTransactionId('100042')
+            ->setReference('100042')
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCardId('E65OPXNV9D59WM7JL402')
             ->setCapture(true)
@@ -90,7 +90,7 @@ class AuthorizeRequestTest extends TestCase
             ->setQuantity(2)
             ->setPrice(39.99);
         $this->request
-            ->setTransactionId('100042')
+            ->setReference('100042')
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCard($card)
             ->setCapture(true)

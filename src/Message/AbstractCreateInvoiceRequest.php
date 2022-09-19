@@ -24,8 +24,8 @@ abstract class AbstractCreateInvoiceRequest extends AbstractInvoiceRequest
             'customer_id' => $this->getCustomerId(),
             'due_date' => $this->getDueDate(),
         ];
-        if (!empty($this->getTransactionId())) {
-            $data['reference'] = $this->getTransactionId();
+        if (!empty($this->getReference())) {
+            $data['reference'] = $this->getReference();
         }
         $items = $this->getItems();
         if (!empty($items)) {

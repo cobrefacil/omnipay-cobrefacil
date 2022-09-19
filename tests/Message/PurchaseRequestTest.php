@@ -58,7 +58,7 @@ class PurchaseRequestTest extends TestCase
             ->setWarningDescription('Em caso de dúvidas entre em contato com nossa Central de Atendimento.')
             ->setSendTaxInvoice(true);
         $this->request
-            ->setTransactionId('100042')
+            ->setReference('100042')
             ->setPayableWith('bankslip')
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setDueDate('2022-12-05')
@@ -97,7 +97,7 @@ class PurchaseRequestTest extends TestCase
             ->setQuantity(2)
             ->setPrice(39.99);
         $this->request
-            ->setTransactionId('100042')
+            ->setReference('100042')
             ->setPayableWith(PurchaseRequest::PAYMENT_METHOD_CREDIT)
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCardId('E65OPXNV9D59WM7JL402')
@@ -140,7 +140,7 @@ class PurchaseRequestTest extends TestCase
             ->setQuantity(2)
             ->setPrice(39.99);
         $this->request
-            ->setTransactionId('100042')
+            ->setReference('100042')
             ->setPayableWith(PurchaseRequest::PAYMENT_METHOD_CREDIT)
             ->setCustomerId('Y73MNPGJ18Y18V5KQODX')
             ->setCreditCard($card)

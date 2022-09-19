@@ -15,6 +15,7 @@ abstract class AbstractCustomerWriteRequest extends AbstractRequest
     {
         parent::initialize($parameters);
         $this->parseNestedParams($parameters);
+        return $this;
     }
 
     /**

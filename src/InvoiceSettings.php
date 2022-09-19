@@ -2,11 +2,13 @@
 
 namespace Omnipay\CobreFacil;
 
+use Omnipay\CobreFacil\Traits\ParseNestedParams;
 use Omnipay\Common\ParametersTrait;
 
 class InvoiceSettings
 {
     use ParametersTrait;
+    use ParseNestedParams;
 
     const LATE_FEE_MODE_PERCENTAGE = 'percentage';
     const LATE_FEE_MODE_FIXED = 'fixed';
@@ -19,6 +21,7 @@ class InvoiceSettings
     public function __construct($parameters = [])
     {
         $this->initialize($parameters);
+        $this->parseNestedParams($parameters);
     }
 
     public function getLateFeeMode()

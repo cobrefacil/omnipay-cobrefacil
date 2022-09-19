@@ -37,7 +37,7 @@ class PurchaseRequestTest extends TestCase
         $this->assertSame('POST', $this->request->getHttpMethod());
     }
 
-    public function testDataBankSlip()
+    public function testDataBankSlipUsingSetters()
     {
         $item1 = (new Item())
             ->setDescription('Teclado')
@@ -64,6 +64,67 @@ class PurchaseRequestTest extends TestCase
             ->setDueDate('2022-12-05')
             ->setItems(new ItemBag([$item1, $item2]))
             ->setSettings($settings);
+        $data = $this->request->getData();
+        $this->assertSame('100042', $data['reference']);
+        $this->assertSame('bankslip', $data['payable_with']);
+        $this->assertSame('Y73MNPGJ18Y18V5KQODX', $data['customer_id']);
+        $this->assertSame('2022-12-05', $data['due_date']);
+        $this->assertSame('Teclado', $data['items'][0]['description']);
+        $this->assertSame(1, $data['items'][0]['quantity']);
+        $this->assertSame(49.99, $data['items'][0]['price']);
+        $this->assertSame('Mouse', $data['items'][1]['description']);
+        $this->assertSame(2, $data['items'][1]['quantity']);
+        $this->assertSame(39.99, $data['items'][1]['price']);
+        $this->assertSame(InvoiceSettings::LATE_FEE_MODE_FIXED, $data['settings']['late_fee']['mode']);
+        $this->assertSame(1.99, $data['settings']['late_fee']['amount']);
+        $this->assertSame(InvoiceSettings::INTEREST_DAILY_PERCENTAGE, $data['settings']['interest']['mode']);
+        $this->assertSame(2.99, $data['settings']['interest']['amount']);
+        $this->assertSame(InvoiceSettings::DISCOUNT_MODE_PERCENTAGE, $data['settings']['discount']['mode']);
+        $this->assertSame(1.11, $data['settings']['discount']['amount']);
+        $this->assertSame('2022-12-01', $data['settings']['discount']['limit_date']);
+        $this->assertSame('Em caso de dúvidas entre em contato com nossa Central de Atendimento.', $data['settings']['warning']['description']);
+        $this->assertSame(true, $data['settings']['send_tax_invoice']);
+    }
+
+    public function testDataBankSlipUsingInitialize()
+    {
+        $this->request->initialize([
+            'reference' => '100042',
+            'payable_with' => 'bankslip',
+            'customer_id' => 'Y73MNPGJ18Y18V5KQODX',
+            'due_date' => '2022-12-05',
+            'items' => [
+                [
+                    'description' => 'Teclado',
+                    'quantity' => 1,
+                    'price' => 49.99,
+                ],
+                [
+                    'description' => 'Mouse',
+                    'quantity' => 2,
+                    'price' => 39.99,
+                ],
+            ],
+            'settings' => [
+                'late_fee' => [
+                    'mode' => InvoiceSettings::LATE_FEE_MODE_FIXED,
+                    'amount' => 1.99,
+                ],
+                'interest' => [
+                    'mode' => InvoiceSettings::INTEREST_DAILY_PERCENTAGE,
+                    'amount' => 2.99,
+                ],
+                'discount' => [
+                    'mode' => InvoiceSettings::DISCOUNT_MODE_PERCENTAGE,
+                    'amount' => 1.11,
+                    'limit_date' => '2022-12-01',
+                ],
+                'warning' => [
+                    'description' => 'Em caso de dúvidas entre em contato com nossa Central de Atendimento.',
+                ],
+                'send_tax_invoice' => true,
+            ],
+        ]);
         $data = $this->request->getData();
         $this->assertSame('100042', $data['reference']);
         $this->assertSame('bankslip', $data['payable_with']);

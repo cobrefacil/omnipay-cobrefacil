@@ -4,9 +4,34 @@ namespace Omnipay\CobreFacil\Message;
 
 use Omnipay\CobreFacil\InvoiceInstallment;
 use Omnipay\CobreFacil\InvoiceSettings;
+use Omnipay\Common\CreditCard;
+use Omnipay\Common\Item;
+use Omnipay\Common\ItemBag;
 
 abstract class AbstractCreateInvoiceRequest extends AbstractInvoiceRequest
 {
+    public function initialize(array $parameters = [])
+    {
+        parent::initialize($parameters);
+        if (isset($parameters['card']) && is_array($parameters['card'])) {
+            $this->setCard(new CreditCard($parameters['card']));
+        }
+        if (isset($parameters['installment']) && is_array($parameters['installment'])) {
+            $this->setInstallment($parameters['installment']);
+        }
+        if (isset($parameters['items']) && is_array($parameters['items'])) {
+            $items = [];
+            foreach ($parameters['items'] as $item) {
+                $items[] = new Item($item);
+            }
+            $this->setItems(new ItemBag($items));
+        }
+        if (isset($parameters['settings']) && is_array($parameters['settings'])) {
+            $this->setSettings(new InvoiceSettings($parameters['settings']));
+        }
+        return $this;
+    }
+
     public function getHttpMethod(): string
     {
         return 'POST';

@@ -81,7 +81,7 @@ class CreateCustomerRequestTest extends TestCase
         $this->assertSame('4321', $data['nfse']['iss']['processo_suspensao']);
     }
 
-    public function testDataPJ()
+    public function testDataPJUsingSetters()
     {
         $this->request
             ->setPersonType(AbstractCustomerWriteRequest::PERSON_TYPE_PJ)
@@ -107,6 +107,58 @@ class CreateCustomerRequestTest extends TestCase
             ->setNfseIssExigibilidade('7')
             ->setNfseIssRetido(true)
             ->setNfseIssProcessoSuspensao('4321');
+        $data = $this->request->getData();
+        $this->assertEmpty($data['taxpayer_id']);
+        $this->assertEmpty($data['personal_name']);
+        $this->assertSame('123456789', $data['ein']);
+        $this->assertSame('New Company', $data['company_name']);
+        $this->assertSame('11888887777', $data['telephone']);
+        $this->assertSame('11999998888', $data['cellular']);
+        $this->assertSame('customer@mail.com', $data['email']);
+        $this->assertSame('another_customer@mail.com', $data['email_cc']);
+        $this->assertSame('New Address', $data['address']['description']);
+        $this->assertSame('Street', $data['address']['street']);
+        $this->assertSame('123', $data['address']['number']);
+        $this->assertSame('Complement', $data['address']['complement']);
+        $this->assertSame('Centro', $data['address']['neighborhood']);
+        $this->assertSame('São Paulo', $data['address']['city']);
+        $this->assertSame('SP', $data['address']['state']);
+        $this->assertSame('1', $data['nfse']['responsavel_retencao']);
+        $this->assertSame('8', $data['nfse']['iss']['tipo_tributacao']);
+        $this->assertSame(true, $data['nfse']['iss']['retido']);
+        $this->assertSame('4321', $data['nfse']['iss']['processo_suspensao']);
+    }
+
+    public function testDataPJUsingArray()
+    {
+        $this->request->initialize([
+            'person_type' => AbstractCustomerWriteRequest::PERSON_TYPE_PJ,
+            'taxpayer_id' => '123456789',
+            'personal_name' => 'New Company',
+            'ein' => '123456789',
+            'company_name' => 'New Company',
+            'telephone' => '11888887777',
+            'cellular' => '11999998888',
+            'email' => 'customer@mail.com',
+            'email_cc' => 'another_customer@mail.com',
+            'address' => [
+                'description' => 'New Address',
+                'street' => 'Street',
+                'number' => '123',
+                'complement' => 'Complement',
+                'neighborhood' => 'Centro',
+                'city' => 'São Paulo',
+                'state' => 'SP',
+            ],
+            'nfse' => [
+                'responsavel_retencao' => '1',
+                'iss' => [
+                    'tipo_tributacao' => '8',
+                    'retido' => true,
+                    'processo_suspensao' => '4321',
+                ],
+            ],
+        ]);
         $data = $this->request->getData();
         $this->assertEmpty($data['taxpayer_id']);
         $this->assertEmpty($data['personal_name']);

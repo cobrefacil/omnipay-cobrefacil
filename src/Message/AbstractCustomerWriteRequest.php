@@ -2,10 +2,20 @@
 
 namespace Omnipay\CobreFacil\Message;
 
+use Omnipay\CobreFacil\Traits\ParseNestedParams;
+
 abstract class AbstractCustomerWriteRequest extends AbstractRequest
 {
+    use ParseNestedParams;
+
     const PERSON_TYPE_PF = 1;
     const PERSON_TYPE_PJ = 2;
+
+    public function initialize(array $parameters = [])
+    {
+        parent::initialize($parameters);
+        $this->parseNestedParams($parameters);
+    }
 
     /**
      * @inheritDoc

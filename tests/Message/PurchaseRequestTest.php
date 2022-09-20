@@ -147,7 +147,7 @@ class PurchaseRequestTest extends TestCase
         $this->assertSame(true, $data['settings']['send_tax_invoice']);
     }
 
-    public function testDataCreditPassingOnlyItsId()
+    public function testDataCreditPassingOnlyItsIdAndUsingSetters()
     {
         $item1 = (new Item())
             ->setDescription('Teclado')
@@ -172,6 +172,52 @@ class PurchaseRequestTest extends TestCase
             ->setSettings(new InvoiceSettings([
                 'send_tax_invoice' => true,
             ]));
+        $data = $this->request->getData();
+        $this->assertSame('100042', $data['reference']);
+        $this->assertSame(PurchaseRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);
+        $this->assertSame('E65OPXNV9D59WM7JL402', $data['credit_card_id']);
+        $this->assertSame(true, $data['capture']);
+        $this->assertSame('127.0.0.1', $data['request_ip']);
+        $this->assertSame(3, $data['installment']['number']);
+        $this->assertSame(InvoiceInstallment::MODE_INTEREST_FREE, $data['installment']['mode']);
+        $this->assertSame('Teclado', $data['items'][0]['description']);
+        $this->assertSame(1, $data['items'][0]['quantity']);
+        $this->assertSame(49.99, $data['items'][0]['price']);
+        $this->assertSame('Mouse', $data['items'][1]['description']);
+        $this->assertSame(2, $data['items'][1]['quantity']);
+        $this->assertSame(39.99, $data['items'][1]['price']);
+        $this->assertSame(true, $data['settings']['send_tax_invoice']);
+    }
+
+    public function testDataCreditPassingOnlyItsIdAndUsingArray()
+    {
+        $this->request->initialize([
+            'reference' => '100042',
+            'payable_with' => PurchaseRequest::PAYMENT_METHOD_CREDIT,
+            'credit_card_id' => 'E65OPXNV9D59WM7JL402',
+            'capture' => true,
+            'request_ip' => '127.0.0.1',
+            'due_date' => '2022-12-05',
+            'installment' => [
+                'number' => 3,
+                'mode' => InvoiceInstallment::MODE_INTEREST_FREE,
+            ],
+            'items' => [
+                [
+                    'description' => 'Teclado',
+                    'quantity' => 1,
+                    'price' => 49.99,
+                ],
+                [
+                    'description' => 'Mouse',
+                    'quantity' => 2,
+                    'price' => 39.99,
+                ],
+            ],
+            'settings' => [
+                'send_tax_invoice' => true,
+            ],
+        ]);
         $data = $this->request->getData();
         $this->assertSame('100042', $data['reference']);
         $this->assertSame(PurchaseRequest::PAYMENT_METHOD_CREDIT, $data['payable_with']);

@@ -17,7 +17,7 @@ abstract class AbstractCreateInvoiceRequest extends AbstractInvoiceRequest
             $this->setCard(new CreditCard($parameters['card']));
         }
         if (isset($parameters['installment']) && is_array($parameters['installment'])) {
-            $this->setInstallment($parameters['installment']);
+            $this->setInstallment(new InvoiceInstallment($parameters['installment']));
         }
         if (isset($parameters['items']) && is_array($parameters['items'])) {
             $items = [];

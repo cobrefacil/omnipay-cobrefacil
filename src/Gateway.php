@@ -2,24 +2,26 @@
 
 namespace Omnipay\CobreFacil;
 
-use Omnipay\CobreFacil\Exception\InvalidCredentialsException;
+use Omnipay\Common\AbstractGateway;
+use Omnipay\CobreFacil\Message\VoidRequest;
+use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\CobreFacil\Message\RefundRequest;
+use Omnipay\CobreFacil\Message\CaptureRequest;
+use Omnipay\CobreFacil\Message\PurchaseRequest;
+use Omnipay\CobreFacil\Message\CreateCardRequest;
+use Omnipay\CobreFacil\Message\DeleteCardRequest;
+use Omnipay\CobreFacil\Message\UpdateCardRequest;
 use Omnipay\CobreFacil\Message\AuthenticateRequest;
 use Omnipay\CobreFacil\Message\AuthenticateResponse;
-use Omnipay\CobreFacil\Message\CaptureRequest;
-use Omnipay\CobreFacil\Message\CreateCardRequest;
-use Omnipay\CobreFacil\Message\CreateCustomerRequest;
-use Omnipay\CobreFacil\Message\DeleteCardRequest;
-use Omnipay\CobreFacil\Message\DeleteCustomerRequest;
 use Omnipay\CobreFacil\Message\FetchCustomerRequest;
-use Omnipay\CobreFacil\Message\FetchTransactionRequest;
 use Omnipay\CobreFacil\Message\ListCustomersRequest;
-use Omnipay\CobreFacil\Message\PurchaseRequest;
-use Omnipay\CobreFacil\Message\RefundRequest;
-use Omnipay\CobreFacil\Message\UpdateCardRequest;
+use Omnipay\CobreFacil\Message\CreateCustomerRequest;
+use Omnipay\CobreFacil\Message\DeleteCustomerRequest;
 use Omnipay\CobreFacil\Message\UpdateCustomerRequest;
-use Omnipay\CobreFacil\Message\VoidRequest;
-use Omnipay\Common\AbstractGateway;
-use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\CobreFacil\Message\FetchReceivableRequest;
+use Omnipay\CobreFacil\Message\ListReceivablesRequest;
+use Omnipay\CobreFacil\Message\FetchTransactionRequest;
+use Omnipay\CobreFacil\Exception\InvalidCredentialsException;
 
 /**
  * Cobre Fácil Gateway
@@ -241,6 +243,30 @@ class Gateway extends AbstractGateway
     public function refund(array $options = []): AbstractRequest
     {
         return $this->createRequest(RefundRequest::class, $options);
+    }
+
+    /**
+     * Fetch receivables.
+     *
+     * @param array $options
+     * @return FetchReceivableRequest
+     * @throws InvalidCredentialsException
+     */
+    public function fetchReceivable(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(FetchReceivableRequest::class, $options);
+    }
+
+    /**
+     * List receivables.
+     *
+     * @param array $parameters
+     * @return ListReceivablesRequest
+     * @throws InvalidCredentialsException
+     */
+    public function listReceivables(array $parameters = []): AbstractRequest
+    {
+        return $this->createRequest(ListReceivablesRequest::class, $parameters);
     }
 
     /**

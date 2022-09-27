@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": [
+        {
+            "id": "P28EM9YZL87J4KV6GO0R",
+            "invoice_id": "RP528EJKXG2EXY60OZLN",
+            "installment": 1,
+            "status": "pending",
+            "amount": "86.39",
+            "gross_amount": "89.98",
+            "anticipation_fee": "0.00",
+            "fee": "3.59",
+            "expected_on": "2020-08-03",
+            "paid_at": null,
+            "canceled_at": null,
+            "created_at": "2020-07-03T11:47:56-03:00",
+            "updated_at": "2020-07-03T11:47:56-03:00"
+        }
+    ]
+}

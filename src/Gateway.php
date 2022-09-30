@@ -21,7 +21,12 @@ use Omnipay\CobreFacil\Message\UpdateCustomerRequest;
 use Omnipay\CobreFacil\Message\FetchReceivableRequest;
 use Omnipay\CobreFacil\Message\ListReceivablesRequest;
 use Omnipay\CobreFacil\Message\FetchTransactionRequest;
+use Omnipay\CobreFacil\Message\PauseSubscriptionRequest;
+use Omnipay\CobreFacil\Message\CancelSubscriptionRequest;
+use Omnipay\CobreFacil\Message\CreateSubscriptionRequest;
+use Omnipay\CobreFacil\Message\UpdateSubscriptionRequest;
 use Omnipay\CobreFacil\Exception\InvalidCredentialsException;
+use Omnipay\CobreFacil\Message\GenerateSubscriptionInvoiceRequest;
 
 /**
  * Cobre Fácil Gateway
@@ -267,6 +272,90 @@ class Gateway extends AbstractGateway
     public function listReceivables(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(ListReceivablesRequest::class, $parameters);
+    }
+    
+    /**
+     * Create Subscription.
+     *
+     * @param array $parameters
+     * @return CreateSubscriptionRequest
+     * @throws InvalidCredentialsException
+     */
+    public function createSubscription(array $parameters = []): AbstractRequest
+    {
+        return $this->createRequest(CreateSubscriptionRequest::class, $parameters);
+    }
+
+    /**
+     * Update Subscription.
+     *
+     * @param array $parameters
+     * @return UpdateSubscriptionRequest
+     * @throws InvalidCredentialsException
+     */
+    public function updateSubscription(array $parameters = []): AbstractRequest
+    {
+        return $this->createRequest(UpdateSubscriptionRequest::class, $parameters);
+    }
+
+    /**
+     * Cancel Subscription.
+     *
+     * @param array $options
+     * @return CancelSubscriptionRequest
+     * @throws InvalidCredentialsException
+     */
+    public function cancelSubscription(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(CancelSubscriptionRequest::class, $options);
+    }
+
+    /**
+     * Pause Subscription.
+     *
+     * @param array $options
+     * @return PauseSubscriptionRequest
+     * @throws InvalidCredentialsException
+     */
+    public function pauseSubscription(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(PauseSubscriptionRequest::class, $options);
+    }
+
+    /**
+     * Generate Subscription Invoice.
+     *
+     * @param array $options
+     * @return GenerateSubscriptionInvoiceRequest
+     * @throws InvalidCredentialsException
+     */
+    public function generateSubscriptionInvoice(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(GenerateSubscriptionInvoiceRequest::class, $options);
+    }
+
+    /**
+     * Fetch Subscription.
+     *
+     * @param array $options
+     * @return FetchSubscriptionRequest
+     * @throws InvalidCredentialsException
+     */
+    public function fetchSubscription(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(FetchSubscriptionRequest::class, $options);
+    }
+
+    /**
+     * List Subscriptions.
+     *
+     * @param array $parameters
+     * @return ListSubscriptionsRequest
+     * @throws InvalidCredentialsException
+     */
+    public function listSubscriptions(array $parameters = []): AbstractRequest
+    {
+        return $this->createRequest(ListSubscriptionsRequest::class, $parameters);
     }
 
     /**

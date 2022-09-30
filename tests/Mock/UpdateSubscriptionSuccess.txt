@@ -1,0 +1,55 @@
+HTTP/1.1 200 Created
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": {
+        "id": "GNX93QM18WQQ8KW6YVZO",
+        "contract_number": null,
+        "create_invoice": "2023-01-27",
+        "customer_id": "N5YG0OV16ZED1EKX7M8Z",
+        "due_day": 28,
+        "error_message": null,
+        "expires_at": null,
+        "first_due_date": "2022-09-28",
+        "generate_days": 5,
+        "interval_size": 1,
+        "interval_type": "month",
+        "invoices": [],
+        "items": [
+            {
+                "id": "L3NVGJ2QYOG6PKE5OZ6R",
+                "description": "###Produto Especial",
+                "price": "100.00",
+                "products_services_id": "K25LRJWON2GON6G4Z37V",
+                "quantity": 2,
+                "type": "service"
+            }
+        ],
+        "next_expiration": "2023-02-01",
+        "notification_rule_id": "52XD4W3GE1DZ97JM1R0K",
+        "paused_at": null,
+        "payable_with": "credit,pix",
+        "plans_id": null,
+        "price": "200.00",
+        "quantity_generated": 0,
+        "reactivate_at": null,
+        "recurrence": null,
+        "reference": "none",
+        "sequencial_number": "MENS00000002",
+        "settings": {
+            "discount": null,
+            "discount_subscription": null,
+            "interest": null,
+            "late_fee": null,
+            "send_tax_invoice": 1,
+            "warning": null
+        },
+        "status": "actived",
+        "created_at": "2022-09-28 10:37:30",
+        "updated_at": "2022-09-29 11:45:16"
+    }
+}

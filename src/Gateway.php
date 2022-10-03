@@ -20,6 +20,7 @@ use Omnipay\CobreFacil\Message\DeleteCustomerRequest;
 use Omnipay\CobreFacil\Message\UpdateCustomerRequest;
 use Omnipay\CobreFacil\Message\FetchReceivableRequest;
 use Omnipay\CobreFacil\Message\ListReceivablesRequest;
+use Omnipay\CobreFacil\Message\ListTaxInvoicesRequest;
 use Omnipay\CobreFacil\Message\FetchTransactionRequest;
 use Omnipay\CobreFacil\Message\PauseSubscriptionRequest;
 use Omnipay\CobreFacil\Message\CancelSubscriptionRequest;
@@ -356,6 +357,18 @@ class Gateway extends AbstractGateway
     public function listSubscriptions(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(ListSubscriptionsRequest::class, $parameters);
+    }
+
+    /**
+     * List Tax Invoices
+     *
+     * @param array $parameters
+     * @return ListTaxInvoicesRequest
+     * @throws InvalidCredentialsException
+     */
+    public function listTaxInvoices(array $parameters = []): AbstractRequest
+    {
+        return $this->createRequest(ListTaxInvoicesRequest::class, $parameters);
     }
 
     /**

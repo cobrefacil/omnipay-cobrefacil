@@ -1,0 +1,42 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 13 Apr 2022 19:41:23 GMT
+Content-Type: application/json; charset=UTF-8
+Connection: keep-alive
+
+{
+    "success": true,
+    "data": [
+        {
+            "id": "XQENV5Y49OK30GWZRM1K",
+            "status": "processing",
+            "status_cancellation": null,
+            "retried": 0,
+            "amount": "750.00",
+            "rps_serie": null,
+            "rps_lot": null,
+            "rps_number": null,
+            "number": null,
+            "note": "",
+            "cancellation_reason": null,
+            "error_message": null,
+            "customer_id": "ROVJZXDE9MJ90MK6N8LP",
+            "invoice_id": null,
+            "cancellation_user_id": null,
+            "url_tax_invoice": "https:\/\/app.sandbox.cobrefacil.com.br\/nota-fiscal\/XQENV5Y49OK30GWZRM1K",
+            "services": [
+                {
+                    "service_code": "1701",
+                    "service_code_taxation": "",
+                    "description": "Produto Especial",
+                    "quantity": 1,
+                    "price": "750.00",
+                    "iss_aliquot": 2,
+                    "cnae": null
+                }
+            ],
+            "created_at": "2022-10-03T11:14:52-03:00",
+            "canceled_at": null
+        }
+    ]
+}

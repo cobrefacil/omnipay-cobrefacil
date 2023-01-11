@@ -113,4 +113,14 @@ class InvoiceSettings
     {
         return $this->setParameter('send_tax_invoice', $value);
     }
+
+    public function getMaxInstallments()
+    {
+        return $this->getParameter('max_installments');
+    }
+
+    public function setMaxInstallments($value): InvoiceSettings
+    {
+        return $this->setParameter('max_installments', $value);
+    }
 }

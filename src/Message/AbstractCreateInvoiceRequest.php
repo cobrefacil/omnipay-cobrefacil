@@ -117,6 +117,9 @@ abstract class AbstractCreateInvoiceRequest extends AbstractInvoiceRequest
             if (!empty($settings->getSendTaxInvoice())) {
                 $data['settings']['send_tax_invoice'] = $settings->getSendTaxInvoice();
             }
+            if (!empty($settings->getMaxInstallments())) {
+                $data['settings']['max_installments'] = $settings->getMaxInstallments();
+            }
         }
         return $data;
     }
